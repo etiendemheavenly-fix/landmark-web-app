@@ -18,8 +18,8 @@ pipeline {
             }
         }
 
-        stage('Test') {
-    steps {
+    stage('Test') {
+      steps {
         // Force the execution shell to jump explicitly into the server folder
         sh '''
             cd server
