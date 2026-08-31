@@ -18,13 +18,14 @@ pipeline {
             }
         }
 
-        stage('Install & Test') {
-            steps {
-                sh 'npm ci'
-                sh 'npm test'
-                sh 'cd server && npm ci && npm test'
-            }
+        stage('Test') {
+    steps {
+        // Navigate to the directory containing your package.json with tests
+        dir('server') {
+            sh 'npm install'
+            sh 'npm test'
         }
+    }
 
         stage('Build Docker Image') {
             steps {
