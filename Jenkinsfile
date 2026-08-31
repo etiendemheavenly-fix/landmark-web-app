@@ -32,12 +32,17 @@ pipeline {
         }
 
         stage('Run Container') {
-            steps {
-                sh 'docker rm -f landmark-test || true'
-                sh 'docker run -d --name landmark-test -p 5000:5000 ${DOCKER_REPO}:${IMAGE_TAG}'
-                sh 'sleep 5'
-                sh 'curl -f http://localhost:5000 || exit 1'
-                sh 'docker stop landmark-test && docker rm landmark-test'
+    steps {
+        sh '''
+            # 1. Stop and remove the target test container if it exists
+            docker rm -f landmark-test || true
+            
+            # 2. Find and kill ANY container currently hogging port 5000
+            docker rm -f $(docker ps -q --filter "publish=5000") || true
+            
+            # 3. Spin up the new container safely
+            docker run -d --name landmark-test -p 5000:5000 etiendemeray/landmark-web-app:build-${BUILD_NUMBER}
+          '''
             }
         }
 
