@@ -16,9 +16,8 @@
     "axios-mock-adapter": "^1.22.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false"
+    "start": "node server/index.js",
+    "test": "cd server && npm install && npm test"
   },
   "proxy": "http://localhost:5000",
   "browserslist": {
