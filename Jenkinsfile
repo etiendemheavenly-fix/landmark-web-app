@@ -20,11 +20,16 @@ pipeline {
 
         stage('Test') {
     steps {
-        sh 'npm test'
+        // Force the execution shell to jump explicitly into the server folder
+        sh '''
+            cd server
+            npm install
+            npm test
+        '''
     }
 }
 
-        stage('Build Docker Image') {
+    stage('Build Docker Image') {
             steps {
                 sh 'docker build -t ${DOCKER_REPO}:${IMAGE_TAG} .'
             }
