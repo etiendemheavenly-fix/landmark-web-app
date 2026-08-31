@@ -20,13 +20,10 @@ pipeline {
 
         stage('Test') {
     steps {
-        // Navigate to the directory containing your package.json with tests
-        dir('server') {
-            sh 'npm install'
-            sh 'npm test'
-        }
+        sh 'npm test'
     }
 }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t ${DOCKER_REPO}:${IMAGE_TAG} .'
