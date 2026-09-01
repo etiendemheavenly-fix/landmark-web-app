@@ -1,4 +1,4 @@
-# Landmark Technologies2
+# Landmark Technologies
 
 A full-stack web application for Landmark Technologies — an online DevOps and AI training platform.
 
