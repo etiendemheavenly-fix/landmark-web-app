@@ -70,7 +70,7 @@ pipeline {
             echo 'Pipeline failed!'
         }
         always {
-            sh 'docker rmi ${DOCKER_REPO}:${IMAGE_TAG} || true'
+            sh 'docker rmi -f ${DOCKER_REPO}:${IMAGE_TAG} || true'
             cleanWs()
         }
     }
